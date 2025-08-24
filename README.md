@@ -171,7 +171,115 @@ graph TB
 
 ## **Directory Structure**
 
-[Previous detailed directory structure section remains - already complete]
+The AMEDEO-P framework follows a comprehensive hierarchical directory structure designed for aerospace systems engineering with complete lifecycle management.
+
+### **Root Level Structure**
+
+```
+AMEDEO-P-AEROSPACE-DEFENSE-AND-GROUND-SYSTEMS/
+├── .github/                          # GitHub integration and workflows
+│   ├── ISSUE_TEMPLATE/               # Issue templates for bug reports, features, CI requests
+│   ├── PULL_REQUEST_TEMPLATE/        # PR template with compliance checklists
+│   └── workflows/                    # CI/CD pipelines and security scanning
+├── docs/                             # Organizational documentation (12 categories)
+│   ├── 01-GOVERNANCE/                # Board structure and executive leadership
+│   ├── 02-FINANCIAL/                 # Business case with ROI analysis
+│   ├── 03-LEGAL-CONTRACTS/           # IP management and export control
+│   ├── 04-PROGRAM-MANAGEMENT/        # Program charter and roadmap
+│   ├── 05-HUMAN-RESOURCES/           # Personnel and training plans
+│   ├── 06-ENGINEERING/               # Technical standards and procedures
+│   ├── 07-QUALITY-ASSURANCE/         # QA processes and certification
+│   ├── 08-CONFIGURATION-MANAGEMENT/  # CM policies and procedures
+│   ├── 09-RISK-MANAGEMENT/           # Risk assessment and mitigation
+│   ├── 10-SUPPLIER-MANAGEMENT/       # Vendor qualification and oversight
+│   ├── 11-CUSTOMER-RELATIONS/        # Customer engagement and support
+│   └── 12-OPERATIONS/                # Daily operations and procedures
+├── templates/                        # Lifecycle phase templates
+│   ├── 01-REQUIREMENTS/              # Requirements specification templates
+│   ├── 02-DESIGN/                    # Design documentation templates
+│   ├── 03-BUILDING-PROTOTYPING/      # Development and prototyping templates
+│   ├── 04-EXECUTABLES-PACKAGES/      # Build and deployment templates
+│   ├── 05-VERIFICATION-VALIDATION/   # Testing and validation templates
+│   ├── 06-INTEGRATION-QUALIFICATION/ # Integration testing templates
+│   ├── 07-CERTIFICATION-SECURITY/    # Certification documentation templates
+│   ├── 08-PRODUCTION-SCALE/          # Production planning templates
+│   ├── 09-OPS-SERVICES/              # Operations and service templates
+│   ├── 10-MRO/                       # Maintenance and repair templates
+│   └── 11-SUSTAINMENT-RECYCLE-EOL/   # End-of-life management templates
+├── tools/                            # Automation and utility scripts
+│   ├── create-ci.sh                  # Configuration Item creation script
+│   ├── validators/                   # Structure and compliance validators
+│   ├── generators/                   # Automated content generators
+│   └── reports/                      # Reporting and analytics tools
+├── UTCS/                             # Unified Traceability & Configuration System
+│   ├── AIR/                          # Air domain systems (1,400 systems)
+│   ├── SPACE/                        # Space domain systems (700 systems)
+│   ├── DEFENSE/                      # Defense domain systems (1,050 systems)
+│   ├── GROUND/                       # Ground domain systems (350 systems)
+│   └── CROSS/                        # Cross-domain systems (420 systems)
+├── CHANGELOG.md                      # Version history and release notes
+├── CODE_OF_CONDUCT.md                # Professional conduct standards
+├── CONTRIBUTING.md                   # Contribution guidelines with DO-178C compliance
+├── IMPLEMENTATION-SUMMARY.md         # Implementation status and capabilities
+├── LICENSE.md                        # Proprietary license with export control
+├── README.md                         # This comprehensive framework documentation
+└── SECURITY.md                       # Security policy and incident response
+```
+
+### **UTCS Domain Structure**
+
+Each domain within the UTCS follows the AMEDEO-P categorization:
+
+```
+UTCS/{DOMAIN}/
+├── Airframes/                        # A - Structural systems and frameworks
+├── Mechanical/                       # M - Actuation and kinematic systems
+├── Environmental/                    # E - Life support and protection systems
+├── Digital_Distributed/              # D - Computing and information systems
+├── Energy/                           # E - Power generation and distribution
+├── Operating_Systems/                # O - Procedures and operational frameworks
+└── Propulsion/                       # P - Thrust generation systems
+```
+
+### **Configuration Item Hierarchy**
+
+```
+UTCS/{DOMAIN}/{CATEGORY}/
+└── System-{ID}-{Name}/               # System level (e.g., System-001-FuselageStructure)
+    └── CA-{CategoryCode}{SystemID}/  # Constituent Assembly (e.g., CA-AA001)
+        └── CI-{CategoryCode}{SystemID}-{CIID}/  # Configuration Item (e.g., CI-AA001-001)
+            ├── 01-REQUIREMENTS/      # Requirements specification and management
+            ├── 02-DESIGN/            # Architecture and detailed design
+            ├── 03-BUILDING-PROTOTYPING/  # Development and prototyping
+            ├── 04-EXECUTABLES-PACKAGES/  # Build artifacts and packages
+            ├── 05-VERIFICATION-VALIDATION/  # Testing and compliance verification
+            ├── 06-INTEGRATION-QUALIFICATION/  # System integration and qualification
+            ├── 07-CERTIFICATION-SECURITY/  # Regulatory approval and security
+            ├── 08-PRODUCTION-SCALE/  # Manufacturing and production
+            ├── 09-OPS-SERVICES/      # Operations and service documentation
+            ├── 10-MRO/               # Maintenance, repair, and overhaul
+            └── 11-SUSTAINMENT-RECYCLE-EOL/  # End-of-life management
+```
+
+### **Domain Distribution**
+
+| Domain | Systems | Categories | Total CIs | Primary Applications |
+|--------|---------|------------|-----------|-------------------|
+| **AIR** | 1,400 | 7 × 200 each | 14,000 | Commercial aviation, military aircraft, UAV, eVTOL |
+| **SPACE** | 700 | 7 × 100 each | 7,000 | Satellites, launch vehicles, spacecraft, habitats |
+| **DEFENSE** | 1,050 | 7 × 150 each | 10,500 | Combat systems, C4ISR, electronic warfare |
+| **GROUND** | 350 | 7 × 50 each | 3,500 | Airports, GSE, ATC, ground systems |
+| **CROSS** | 420 | 7 × 60 each | 4,200 | Common systems, interoperability components |
+| **TOTAL** | **3,920** | **49 categories** | **39,200** | **Complete aerospace ecosystem** |
+
+### **File Organization Standards**
+
+- **Naming Convention**: All files follow aerospace industry naming standards
+- **Version Control**: Git-based with branch protection and review requirements
+- **Documentation**: Markdown format with standards compliance tracking
+- **Metadata**: YAML frontmatter for traceability and classification
+- **Security**: Classification levels and export control markings
+- **Lifecycle**: 11-phase structure for complete cradle-to-grave management
 
 ---
 
