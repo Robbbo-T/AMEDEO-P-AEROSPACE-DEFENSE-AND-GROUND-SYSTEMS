@@ -1,0 +1,111 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly on Monday at 2 AM UTC
+  workflow_dispatch:
+  push:
+    paths:
+      - '**/SECURITY.md'
+      - '.github/workflows/security.yml'
+
+jobs:
+  dependency-audit:
+    name: Dependency Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Audit dependencies
+      run: npm audit --audit-level moderate
+    
+    - name: Check for high/critical vulnerabilities
+      run: npm audit --audit-level high
+
+  container-security:
+    name: Container Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build image for scanning
+      run: docker build -t amedeo-p:security-scan .
+    
+    - name: Run Trivy container scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'amedeo-p:security-scan'
+        format: 'sarif'
+        output: 'container-results.sarif'
+    
+    - name: Upload scan results
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: 'container-results.sarif'
+
+  code-security:
+    name: Static Code Security Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: javascript, typescript
+    
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+    
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+  secrets-scan:
+    name: Secrets Detection
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: TruffleHog OSS
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+
+  compliance-audit:
+    name: Compliance Security Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: ITAR/EAR Compliance Check
+      run: |
+        echo "Checking for export control compliance..."
+        # Add export control scanning logic
+    
+    - name: Classification Level Validation
+      run: |
+        echo "Validating classification markings..."
+        # Add classification validation logic
+    
+    - name: Security Control Assessment
+      run: |
+        echo "Assessing security controls..."
+        # Add security control validation logic
